@@ -11,8 +11,7 @@ namespace InForno.Models
 
         public string Nome { get; set; }
         public decimal CostoProdotto { get; set; }
-
-        public decimal CostoAggiunzione { get; set; }
+        
 
         public int IdProdotto { get; set; }
 

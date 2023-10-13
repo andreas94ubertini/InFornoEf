@@ -22,25 +22,25 @@
                 {
                     <ul class="navbar-nav flex-grow-1 d-flex justify-content-between align-items-center">
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        <li>@Html.ActionLink("Prodotti", "Index", "Prodotto", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        <li>@Html.ActionLink("Ordini Attivi", "Index", "Ordine", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Lista Prodotti", "Index", "Prodotto", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Lista Ordini Attivi", "Index", "Ordine", new { area = "" }, new { @class = "nav-link text-light" })</li>
                         <li>@Html.ActionLink("Riepilogo Giornata", "Index", "Query", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        <li>@Html.ActionLink("LogOut", "Logout", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     </ul>
                 }
                 else if (User.IsInRole("User"))
                 {
                     <ul class="navbar-nav flex-grow-1 d-flex justify-content-between align-items-center">
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        <li>@Html.ActionLink("Stato Ordinazione", "Index", "DettaglioOrdine", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Il Mio Ordine", "Index", "DettaglioOrdine", new { area = "" }, new { @class = "nav-link text-light" })</li>
                         <li>Benvenuto @User.Identity.Name</li>
-                        <li>@Html.ActionLink("LogOut", "Logout", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     </ul>
                 }
                 else
                 {
                     <ul class="navbar-nav flex-grow-1 d-flex justify-content-end">
-                        <li>@Html.ActionLink("LogIn", "Login", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
                         <li>@Html.ActionLink("Sign In", "SignIn", "Auth", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     </ul>
                 }
