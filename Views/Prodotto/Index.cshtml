@@ -1,0 +1,53 @@
+﻿@model IEnumerable<InForno.Models.Prodotto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center text-light">Lista Prodotti</h2>
+
+<div class="card">
+    <p class="px-2">
+        @Html.ActionLink(" Crea", "Create","Prodotto", new { @class= "btn btn-success w-100 my-2" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezzo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredienti)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>
+                <td>
+                    @String.Format("{0:0.00 €}", item.Prezzo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredienti)
+                </td>
+                <td>
+                    @Html.ActionLink(" Modifica", "Edit", new { id = item.IdProdotto }, new { @class = "btn btn-success" })
+                    @Html.ActionLink(" Cancella", "Delete", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<InForno.Models.DettaglioOrdine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center text-light">Il Mio Ordine:</h2>
+
+@if (Model == null)
+{
+    <p class="alert alert-danger">@ViewBag.Error</p>
+}
+else
+{
+<div class="card">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodotto.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantita)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodotto.Prezzo)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prodotto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantita)
+                </td>
+
+            </tr>
+        }
+    </table>
+    <p class="mx-2"> Totale: $@ViewBag.Ordine.Importo</p>
+    <hr />
+    @if (ViewBag.Ordine.Evaso)
+    {
+        <p class="mx-2">Il tuo Ordine sta arrivando!</p>
+    }
+    else
+    {
+        <p class="mx-2">Stiamo preparando il tuo Ordine, partirà a breve!</p>
+    }
+</div>
+}
+
+

@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center text-light">Query Area</h2>
+
+<div class="card p-3 mt-3">
+    <div class="row row-cols-2 justify-content-around">
+        <div class="col d-flex flex-column p-2">
+            <button class="btn btn-success" id="ordiniEvasi">Visualizza gli ordini evasi</button>
+        </div>
+        <div class="col d-flex flex-column p-2">
+            <button class="btn btn-success" id="GuadagnoGiornaliero">Visualizza il Totale Incassato Oggi</button>
+        </div>
+        <div class="col">
+            <ul id="listaOrdiniEvasi"></ul>
+        </div>
+        <div class="col">
+            <ul id="totGuadagnato"></ul>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#ordiniEvasi").click(function () {
+                $("#listaOrdiniEvasi").empty();
+                $.ajax({
+                    method: 'GET',
+                    url: "Query/GetOrdiniEvasi",
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            var licurrent = "<li>" +
+                                "Effettuata il: " + v.Data + "<br>" +
+                                "Indirizzo: " + v.Indirizzo + "<br>" +
+                                "Importo: €" + v.Importo + "<br>" +
+                                "</li>";
+                            $("#listaOrdiniEvasi").append(licurrent);
+                        });
+                    }
+                });
+            });
+
+            $("#GuadagnoGiornaliero").click(function () {
+                $("#totGuadagnato").empty();
+                $.ajax({
+                    method: 'GET',
+                    url: "Query/GetTotGuadagnato",
+                    success: function (data) {
+                        var licurrent = "<li>" +
+                            "Totale Guadagnato Oggi: " + data +
+                            "€</li>";
+                        $("#totGuadagnato").append(licurrent);
+                    }
+                });
+            });
+        });
+    </script>
+}

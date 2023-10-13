@@ -1,0 +1,67 @@
+﻿@model IEnumerable<InForno.Models.Ordine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center text-light">Lista Ordini Attivi</h2>
+
+<div class="card">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evaso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concluso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempoConsegna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Indirizzo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importo)
+            </th>
+            <th>Azioni</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evaso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Concluso)
+                </td>
+                <td>
+                    @item.Data.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempoConsegna)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Indirizzo)
+                </td>
+                <td>
+                    @String.Format("{0:0.00 €}", item.Importo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }, new {@class="btn btn-success"})
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

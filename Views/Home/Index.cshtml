@@ -1,0 +1,62 @@
+﻿@model IEnumerable<InForno.Models.Prodotto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row flex-column flex-md-row">
+    <div class="col col-md-2">
+        <h2 class="text-center text-light">Nel Carrello</h2>
+        <div class="card">
+            <div class="card-body">
+                @if (ViewBag.Carrello != null)
+                {
+                    foreach (InForno.Models.Cart p in ViewBag.Carrello)
+                    {
+                        <div>
+                            <p class="fw-bold my-0">@p.Nome</p>
+                            <p class="my-0">Qt.@p.Quantita @String.Format("{0:0.00 €}", p.CostoProdotto * p.Quantita + p.CostoAggiunzione * p.Quantita)</p>
+                        </div>
+                        <hr />
+                    }
+                    <div class="d-flex flex-column  align-items-md-center">
+                        <p class="fw-bold">
+                            Totale: @String.Format("{0:0.00 €}", InForno.Models.Cart.CalcoloCostoTotale(ViewBag.Carrello))
+                        </p>
+                        @Html.ActionLink("Ordina", "AddOrdine", "Ordine", "", new { @class = "btn btn-success" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-10">
+        <h2 class="text-center">Lista Pizze</h2>
+        @foreach (var item in Model)
+        {
+            <div class="card d-flex my-2 flex-column flex-md-row">
+                <img src="~/Content/assets/@item.Foto" class="card-img-top w-25" alt="@item.Nome">
+                <div class="card-body justify-content-between align-items-start row">
+                    <div class="d-flex flex-column mx-2 col-12">
+                        <h5 class="card-title">@item.Nome</h5>
+                        <p class="card-text m-0">Ingredienti:</p>
+                        <p class="card-text ">@item.Ingredienti</p>
+                        <p class="fw-bold mx-2">@String.Format("{0:0.00 €}", item.Prezzo)</p>
+                    </div>
+                    <div class="mx-2 col-12">
+                        @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                        {
+                            @Html.Hidden("IdProdotto", item.IdProdotto)
+                            <label for="Quantita">Quantità</label>
+                            <input id="Quantita" name="Quantita" class="w-50 form-control" type="number" value="1" />
+                            <input type="submit" value="Aggiungi al carrello" class="btn btn-success my-2" />
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+

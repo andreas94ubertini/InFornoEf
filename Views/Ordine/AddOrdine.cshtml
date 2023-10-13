@@ -1,0 +1,63 @@
+﻿@model InForno.Models.Ordine
+
+@{
+    ViewBag.Title = "AddOrdine";
+}
+
+<h3 class="text-center text-light">Carrello</h3>
+<div class="card">
+    @if (ViewBag.Carrello != null)
+    {
+        foreach (InForno.Models.Cart p in ViewBag.Carrello)
+        {
+            <div class="m-4">
+                <p class="fw-bold my-0">@p.Nome</p>
+                <p class="my-0">Qt.@p.Quantita @String.Format("{0:0.00 €}", p.CostoProdotto * p.Quantita + p.CostoAggiunzione * p.Quantita)</p>
+            </div>
+            <hr />
+        }
+        <div class="d-flex flex-column mx-4">
+            <p class="fw-bold">Totale: @String.Format("{0:0.00 €}", InForno.Models.Cart.CalcoloCostoTotale(ViewBag.Carrello))</p>
+        </div>
+    }
+
+    <h2 class="text-center">Completa Ordine</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mx-4">
+                @Html.LabelFor(model => model.Commento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Commento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mx-4">
+                @Html.LabelFor(model => model.Indirizzo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Indirizzo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Indirizzo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <div class="col-md-offset-2 col-md-12">
+                    <input type="submit" value="Effettua Ordine" class="btn btn-success m-4" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
