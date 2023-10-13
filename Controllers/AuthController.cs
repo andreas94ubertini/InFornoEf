@@ -35,7 +35,7 @@ namespace InForno.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignIn(User u)
+        public ActionResult SignIn([Bind(Exclude = "Ruolo")] User u)
         {
             if (ModelState.IsValid)
             {
